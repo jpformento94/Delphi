@@ -2,7 +2,7 @@ object fLayout: TfLayout
   Left = 0
   Top = 0
   AutoSize = True
-  Caption = 'fLayout'
+  Caption = 'Archivos de texto'
   ClientHeight = 366
   ClientWidth = 657
   Color = clBtnFace

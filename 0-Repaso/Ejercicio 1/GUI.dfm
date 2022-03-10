@@ -2,6 +2,7 @@ object fLayout: TfLayout
   Left = 0
   Top = 0
   AutoSize = True
+  Caption = 'Vectores'
   ClientHeight = 181
   ClientWidth = 581
   Color = clBtnFace

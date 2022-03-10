@@ -1,8 +1,9 @@
-program Project1;
+program Vectores;
 
 uses
   Vcl.Forms,
-  GUI in 'GUI.pas' {fLayout};
+  GUI in 'GUI.pas' {fLayout},
+  Code in 'Code.pas';
 
 {$R *.res}
 

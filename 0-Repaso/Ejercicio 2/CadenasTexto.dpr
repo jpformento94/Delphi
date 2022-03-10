@@ -1,9 +1,9 @@
-program Project1;
+program CadenasTexto;
 
 uses
   Vcl.Forms,
   GUI in 'GUI.pas' {fLayout},
-  Code in 'Code.pas';
+  Cadenas in 'Cadenas.pas';
 
 {$R *.res}
 

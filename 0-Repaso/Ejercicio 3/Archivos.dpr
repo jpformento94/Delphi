@@ -1,9 +1,8 @@
-program Project1;
+program Archivos;
 
 uses
   Vcl.Forms,
-  GUI in 'GUI.pas' {fLayout},
-  Cadenas in 'Cadenas.pas';
+  GUI in 'GUI.pas' {fLayout};
 
 {$R *.res}
 
