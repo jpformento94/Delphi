@@ -58,6 +58,7 @@ object fLayout: TfLayout
     Height = 25
     Caption = 'Split'
     TabOrder = 3
+    OnClick = bSplitClick
   end
   object bClearMemo: TButton
     Left = 0
