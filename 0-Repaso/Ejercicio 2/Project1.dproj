@@ -99,7 +99,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="GUI.pas">
-            <Form>Form1</Form>
+            <Form>fLayout</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Cadenas.pas"/>

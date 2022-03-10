@@ -7,14 +7,22 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, character, Cadenas;
 
 type
-  TForm1 = class(TForm)
+  TfLayout = class(TForm)
     mVisualizacion: TMemo;
     bSoloMayusculas: TButton;
     bCargarTexto: TButton;
     bSoloMinusculas: TButton;
+    bNoSpace: TButton;
+    bNoSpaceInverter: TButton;
+    bCaracteres: TButton;
+    bConsonantes: TButton;
     procedure bCargarTextoClick(Sender: TObject);
     procedure bSoloMayusculasClick(Sender: TObject);
     procedure bSoloMinusculasClick(Sender: TObject);
+    procedure bNoSpaceClick(Sender: TObject);
+    procedure bNoSpaceInverterClick(Sender: TObject);
+    procedure bCaracteresClick(Sender: TObject);
+    procedure bConsonantesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,7 +30,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  fLayout: TfLayout;
   s: cadenaTexto;
 
 implementation
@@ -30,18 +38,39 @@ implementation
 {$R *.dfm}
 
 
-procedure TForm1.bCargarTextoClick(Sender: TObject);
+procedure TfLayout.bCaracteresClick(Sender: TObject);
 begin
+  mVisualizacion.Lines.Add(s.cantidadDeCaracteres);
+end;
+
+procedure TfLayout.bCargarTextoClick(Sender: TObject);
+begin
+  mVisualizacion.Clear;
   s.cargarString();
   mVisualizacion.Lines.Add(s.texto);
 end;
 
-procedure TForm1.bSoloMayusculasClick(Sender: TObject);
+procedure TfLayout.bConsonantesClick(Sender: TObject);
+begin
+  mVisualizacion.Lines.Add(s.ocurrenciasDeConsonantes);
+end;
+
+procedure TfLayout.bNoSpaceClick(Sender: TObject);
+begin
+  mVisualizacion.Lines.Add(s.sinEspacios);
+end;
+
+procedure TfLayout.bNoSpaceInverterClick(Sender: TObject);
+begin
+  mVisualizacion.Lines.Add(s.sinEspaciosInvertida);
+end;
+
+procedure TfLayout.bSoloMayusculasClick(Sender: TObject);
 begin
   mVisualizacion.Lines.Add(s.soloMayusculas());
 end;
 
-procedure TForm1.bSoloMinusculasClick(Sender: TObject);
+procedure TfLayout.bSoloMinusculasClick(Sender: TObject);
 begin
   mVisualizacion.Lines.Add(s.soloMinusculas);
 end;

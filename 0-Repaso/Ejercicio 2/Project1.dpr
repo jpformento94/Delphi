@@ -2,7 +2,7 @@ program Project1;
 
 uses
   Vcl.Forms,
-  GUI in 'GUI.pas' {Form1},
+  GUI in 'GUI.pas' {fLayout},
   Cadenas in 'Cadenas.pas';
 
 {$R *.res}
@@ -10,6 +10,6 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfLayout, fLayout);
   Application.Run;
 end.

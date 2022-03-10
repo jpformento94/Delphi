@@ -11,7 +11,13 @@ type
     procedure cargarString();
     function soloMayusculas():string;
     function soloMinusculas():string;
+    function sinEspacios():string;
+    function sinEspaciosInvertida():string;
+    function cantidadDeCaracteres: string;
+    function ocurrenciasDeConsonantes:string;
   end;
+
+  vector= array[66..90] of integer;
 
 implementation
 
@@ -46,23 +52,68 @@ implementation
   end;
 
   //Muestra el texto sin espacios
-  function sinEspacios(s: string): string;
+  function cadenaTexto.sinEspacios: string;
+  var
+    i: integer;
   begin
+    for i := 1 to Length(texto) do
+      begin
+        if (texto[i]<> ' ') Then
+          Result := Result + texto[i];
+      end;
   end;
 
   //Muestra el texto sin espacios e invertido
-  function sinEspaciosInvertida(s: string): string;
+  function cadenaTexto.sinEspaciosInvertida: string;
+   var
+    i: integer;
+    invertido: string;
   begin
+    for i := Length(texto) downto 1 do
+      begin
+        if (texto[i]<> ' ') Then
+          Result := Result + texto[i];
+      end;
   end;
 
   //Muestra la cantidad de caracteres
-  function cantidadDeCaracteres(s: string): string;
+  function cadenaTexto.cantidadDeCaracteres:string;
   begin
+    result:= inttostr(Length(texto));
   end;
 
   //Muestras la cantidad de veces que aparece cada consonante
-  function ocurrenciasDeConsonantes(s: string): string;
+  function cadenaTexto.ocurrenciasDeConsonantes:string;
+  var
+    i, indiceChar: integer;
+    s, cantidad: string;
+    v: vector;
   begin
+    cantidad:= '';
+    s:= texto;
+    //Inicializo el vector en 0 para que no sume basura
+    for i := 66 to 90 do
+      v[i]:= 0;
+    //convierto el texto a mayusculas
+    s:= UpperCase(s);
+    //Recorro el texto
+    for i := 1 to Length(s) do
+      begin  //Comparo si no es una vocal
+        if (s[i] <> 'A') and (s[i] <> 'E') and (s[i] <> 'I') and
+            (s[i] <> 'O') and (s[i] <> 'U') then
+        begin
+          {Cada indice del vector corresponde al valor ASCII de la consonante
+          entonces le sumo 1}
+          indiceChar:=  Ord(s[i]);
+          v[indiceChar] := (v[indiceChar] + 1);
+        end;
+      end;
+    for indiceChar := 66 to 90 do
+      begin
+        if (v[indiceChar] <> 0) then
+          cantidad:= cantidad + char(indiceChar) + '=' + inttostr(v[indiceChar]) + ' ';
+      end;
+    result:= cantidad;
   end;
 
 end.
