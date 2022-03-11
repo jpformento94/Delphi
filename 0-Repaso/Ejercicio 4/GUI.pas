@@ -9,7 +9,7 @@ uses
   const
     MIN = 1;
     //Rango de la matriz
-    N = 10;
+    N = 4;
 
 type
   TfLayout = class(TForm)
@@ -47,7 +47,7 @@ implementation
             M[i,j]:= random(N * N);
             if (M[i,j] < 10) then
               s:= s + '  ';
-            s:= s + (inttostr(M[i,j]) + '    ');
+            s:= s + (inttostr(M[i,j]) + '   ');
           end;
         s:= s + Char(13) + Char(10);
       end;
