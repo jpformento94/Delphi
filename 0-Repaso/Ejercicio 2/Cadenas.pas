@@ -25,9 +25,12 @@ implementation
   procedure cadenaTexto.cargarString();
   begin
     texto:= InputBox('Ingresar una cadena de texto', 'Cadena de texto', 'Texto de prueba Hola Mundo!');
-    while ((Length(texto) > 40)) do
+    while (texto.Length = 0) or (texto.Length > 40) do
       begin
-        ShowMessage('El texto no debe tener mas de 40 caracteres');
+        if (texto.Length = 0) then
+          ShowMessage('No ingrese un texto vacio, intente nuevamente')
+        else
+          ShowMessage('El texto no debe tener mas de 40 caracteres, intente nuevamente');
         texto:= InputBox('Ingresar un Caracter', 'Ingresar Datos', 'Texto de prueba Hola Mundo!');
       end;
     texto:= trim(texto);
