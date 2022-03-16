@@ -24,12 +24,13 @@ implementation
   //Cargar texto a utilizar
   procedure cadenaTexto.cargarString();
   begin
-    texto:= InputBox('Ingresar un Caracter', 'Ingresar Datos', 'Texto de prueba Hola Mundo!');
-    while (Length(texto) > 40) do
+    texto:= InputBox('Ingresar una cadena de texto', 'Cadena de texto', 'Texto de prueba Hola Mundo!');
+    while ((Length(texto) > 40)) do
       begin
         ShowMessage('El texto no debe tener mas de 40 caracteres');
         texto:= InputBox('Ingresar un Caracter', 'Ingresar Datos', 'Texto de prueba Hola Mundo!');
       end;
+    texto:= trim(texto);
   end;
 
   //Muestras las mayusculas del texto
