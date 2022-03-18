@@ -1,9 +1,10 @@
 object fLayout: TfLayout
   Left = 0
   Top = 0
+  AutoSize = True
   Caption = 'Cuadrado latino'
-  ClientHeight = 315
-  ClientWidth = 400
+  ClientHeight = 129
+  ClientWidth = 265
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,9 +16,10 @@ object fLayout: TfLayout
   TextHeight = 13
   object bCargar: TButton
     Left = 0
-    Top = 287
-    Width = 394
+    Top = 104
+    Width = 265
     Height = 25
+    Align = alBottom
     Caption = 'Cuadrado latino'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -27,12 +29,18 @@ object fLayout: TfLayout
     ParentFont = False
     TabOrder = 0
     OnClick = bCargarClick
+    ExplicitLeft = 8
+    ExplicitTop = 114
   end
-  object mVisualizacion: TMemo
+  object sgMatriz: TStringGrid
     Left = 0
     Top = 0
-    Width = 394
-    Height = 281
+    Width = 265
+    Height = 104
+    Align = alClient
+    ColCount = 4
+    DefaultColAlignment = taCenter
+    RowCount = 4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -40,5 +48,7 @@ object fLayout: TfLayout
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 283
+    ExplicitHeight = 116
   end
 end
