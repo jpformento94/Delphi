@@ -3,7 +3,7 @@ object fGUI: TfGUI
   Top = 0
   Caption = 'Estacionamiento'
   ClientHeight = 382
-  ClientWidth = 752
+  ClientWidth = 747
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -157,32 +157,6 @@ object fGUI: TfGUI
     Font.Style = []
     ParentFont = False
   end
-  object lDia: TLabel
-    Left = 8
-    Top = 98
-    Width = 23
-    Height = 19
-    Caption = 'Dia'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
-  object lMes: TLabel
-    Left = 8
-    Top = 128
-    Width = 27
-    Height = 19
-    Caption = 'Mes'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
   object bAgregar: TButton
     Left = 8
     Top = 217
@@ -296,38 +270,13 @@ object fGUI: TfGUI
     ParentFont = False
     TabOrder = 7
   end
-  object eDia: TEdit
-    Left = 66
+  object datePicker: TDateTimePicker
+    Left = 8
     Top = 98
-    Width = 63
-    Height = 24
-    Alignment = taCenter
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    MaxLength = 2
-    NumbersOnly = True
-    ParentFont = False
+    Width = 121
+    Height = 21
+    Date = 44645.000000000000000000
+    Time = 0.472752673609647900
     TabOrder = 8
-    OnChange = eMinutosChange
-  end
-  object eMes: TEdit
-    Left = 66
-    Top = 128
-    Width = 63
-    Height = 24
-    Alignment = taCenter
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    MaxLength = 2
-    NumbersOnly = True
-    ParentFont = False
-    TabOrder = 9
-    OnChange = eMinutosChange
   end
 end

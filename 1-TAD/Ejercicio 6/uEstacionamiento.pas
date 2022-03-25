@@ -41,10 +41,12 @@ type
       tarifa_por_hora: double;
       function getCantidadDeAutos():word;
       procedure setTarifa(monto:double);
-      procedure cargarAuto(mes,dia,hora,min:integer; p:string);
-      procedure sacarAuto(mes,dia,hora,min: integer; p: string);
+      procedure cargarAuto(hora,min:integer; fecha, p:string);
+      function sacarAuto(hora,min: integer; fecha, p: string):string;
       procedure inicializarVectorClientes();
       function clientesToString:string;
+      function informeDeCobro(i:integer):string;
+      procedure tarifaAPagar(i:integer);
   end;
 
 implementation
@@ -61,13 +63,26 @@ begin
       if (clientes[i].activo = true) then
         begin
           s:= s + 'Patente: '+ clientes[i].patente +
-                ' Fecha de entrada: ' + clientes[i].dia_entrada.ToString + '/' + clientes[i].mes_entrada.ToString +
-                ' Hora de entrada: ' + clientes[i].hora_entrada.ToString + ':' + clientes[i].minutos_entrada.ToString + char(13) + char(10);
+              char(13) + char(10) +
+              'Fecha de entrada: ' + clientes[i].dia_entrada.ToString + '/' + clientes[i].mes_entrada.ToString +
+              ' Hora de entrada: ' + clientes[i].hora_entrada.ToString + ':' + clientes[i].minutos_entrada.ToString + char(13) + char(10);
         end;
     end;
   result:= s;
 end;
 
+function estacionamiento.informeDeCobro(i:integer):string;
+begin
+  result:=  'Patente: '+ clientes[i].patente + 
+            char(13) + char(10) +
+            'Fecha de entrada: ' + clientes[i].dia_entrada.ToString + '/' + clientes[i].mes_entrada.ToString +
+            ' Hora de entrada: ' + clientes[i].hora_entrada.ToString + ':' + clientes[i].minutos_entrada.ToString + 
+            char(13) + char(10) +
+            'Fecha de salida: ' + clientes[i].dia_salida.ToString + '/' + clientes[i].mes_salida.ToString +
+            ' Hora de salida: ' + clientes[i].hora_salida.ToString + ':' + clientes[i].minutos_salida.ToString  +
+            char(13) + char(10) +
+            'Tarifa: ' + clientes[i].cobro.ToString;
+end;
 
 //Inicializar vector de clientes vacio y con los registros listos para sobreescribir
 procedure estacionamiento.inicializarVectorClientes();
@@ -90,7 +105,7 @@ begin
 end;
 
 //Cargar auto nuevo
-procedure estacionamiento.cargarAuto(mes,dia,hora,min: integer; p: string);
+procedure estacionamiento.cargarAuto(hora,min: integer; fecha,p: string);
 var
   i: word;
 begin
@@ -100,8 +115,8 @@ begin
       if (clientes[i].activo=false) then
         begin
           clientes[i].patente:= UpperCase(p);
-          clientes[i].mes_entrada:= mes;
-          clientes[i].dia_entrada:= dia;
+          clientes[i].dia_entrada:= strtoint(copy(fecha,1,2));
+          clientes[i].mes_entrada:= strtoint(copy(fecha,4,2));
           clientes[i].hora_entrada:= hora;
           clientes[i].minutos_entrada:= min;
           clientes[i].activo:= true;
@@ -114,7 +129,7 @@ begin
 end;
 
 //Sacar un auto y devolver monto a pagar
-procedure estacionamiento.sacarAuto(mes,dia,hora,min: integer; p: string);
+function estacionamiento.sacarAuto(hora,min: integer; fecha,p: string):string;
 var
   i: word;
   flag: boolean;
@@ -131,12 +146,14 @@ begin
         if (clientes[i].patente = p) and (clientes[i].activo = true) then
           begin
             flag:= true;
-            clientes[i].mes_salida:= mes;
-            clientes[i].dia_salida:= dia;
+            clientes[i].dia_salida:= strtoint(copy(fecha,1,2));
+            clientes[i].mes_salida:= strtoint(copy(fecha,4,2));
             clientes[i].hora_salida:= hora;
             clientes[i].minutos_salida:= min;
             clientes[i].activo:= false;
+            tarifaAPagar(i);
             dec(cantidad_de_autos);
+            result:= informeDeCobro(i);
           end;
         inc(i);
       end;
@@ -160,11 +177,18 @@ begin
 end;
 
 //Tarifa a pagar
-function tarifa():double;
+procedure estacionamiento.tarifaAPagar(i: Integer);
 var
-  i:integer;
+  horas: integer;
 begin
-
+  horas:= clientes[i].hora_salida - clientes[i].hora_entrada;
+  if (horas>=6) then  begin
+    clientes[i].cobro:= tarifa;
+  end;
+  if (horas>=3) and (horas<6) then  begin
+    clientes[i].cobro:= media_tarifa;
+  end;
+  
 end;
 
 end.
