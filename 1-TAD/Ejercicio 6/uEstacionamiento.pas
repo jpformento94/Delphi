@@ -8,7 +8,7 @@ uses
 
 Const
   MIN = 1;
-  MAX = 3;   {Numero maximo de autos que se pueden guardar,
+  MAX = 10;   {Numero maximo de autos que se pueden guardar,
                 ya que un estacionamiento tiene un espacio fisico limitado
                 cambiar la variable maximo segun la cantidad de autos que se
                 puedan guardar en el estacionamiento}
@@ -34,11 +34,10 @@ type
       clientes: Array[MIN..MAX] of auto;
       cantidad_de_autos: word;
     public
-      hora_salida: integer;
-      minutos_salida: integer;
       tarifa: double;
       media_tarifa: double;
       tarifa_por_hora: double;
+      tarifa_por_10min: double;
       function getCantidadDeAutos():word;
       procedure setTarifa(monto:double);
       procedure cargarAuto(hora,min:integer; fecha, p:string);
@@ -47,6 +46,7 @@ type
       function clientesToString:string;
       function informeDeCobro(i:integer):string;
       procedure tarifaAPagar(i:integer);
+      function tarifaEnElDia(i:integer):double;
   end;
 
 implementation
@@ -172,23 +172,66 @@ end;
 procedure estacionamiento.setTarifa(monto:double);
 begin
   tarifa:= monto;
-  media_tarifa:= monto / 2;
+  media_tarifa:= tarifa / 2;
   tarifa_por_hora:= tarifa / 4;
+  tarifa_por_10min:= tarifa / 10;
+end;
+
+//Tarifa en el mismo dia
+function estacionamiento.tarifaEnElDia(i:integer):double;
+var
+  tTotal, tEntrada, tSalida, horas, minutos: integer;   //La t significa tiempo
+  monto_a_pagar: double;
+begin
+  horas:= 0;
+  minutos:= 0;
+  monto_a_pagar:= 0;
+  //Convierto todo a minutos
+  tEntrada:= (clientes[i].hora_entrada*60) + clientes[i].minutos_entrada;
+  tSalida:= (clientes[i].hora_salida*60) + clientes[i].minutos_salida;
+  tTotal:= tSalida - tEntrada;
+
+  //Si estuvo mas de 6hs se cobra estadia completa
+  if (tTotal>=360) then begin
+    result:= tarifa;
+  end;
+
+  //Si estuvo mas de 3hs pero menos de 6hs se cobra media estadia
+  if (tTotal>=180) and (tTotal<360) then  begin
+    result:= media_tarifa;
+  end;
+
+  //Si el auto estuvo menos de una hora se cobra el mininmo de la tarifa que es 1hs
+  if (tTotal>=0) and (tTotal<60) then  begin
+    result:= tarifa_por_hora;
+  end;
+
+  //Si el auto estuvo mas de 1hs pero menos de 3hs
+  //calculo la tarifa por hora mas la el tiempo fraccionado de a 10 minutos
+  if (tTotal>=60) and (tTotal<180) then begin
+    //Si es mayora a 1hs lo voy sumando
+    while (tTotal>=60) do begin
+      inc(horas);
+      tTotal:= tTotal - 60;
+    end;
+    //Si es mayor o igual a 10 minutos voy sumando
+    while (tTotal>=10) do begin
+      inc(minutos);
+      tTotal:= tTotal - 10;   //Resto de a 10 minutos que es lo que se fracciona despues de una hora
+    end;
+    monto_a_pagar:= (horas * tarifa_por_hora);//Multiplico la tarifa por la cantidad de horas
+    monto_a_pagar:= monto_a_pagar + (minutos * tarifa_por_10min);
+    result:= monto_a_pagar;
+  end;
+
 end;
 
 //Tarifa a pagar
 procedure estacionamiento.tarifaAPagar(i: Integer);
-var
-  horas: integer;
 begin
-  horas:= clientes[i].hora_salida - clientes[i].hora_entrada;
-  if (horas>=6) then  begin
-    clientes[i].cobro:= tarifa;
+  if (clientes[i].mes_entrada = clientes[i].mes_salida) and (clientes[i].dia_entrada = clientes[i].dia_salida) then begin
+    clientes[i].cobro:= estacionamiento.tarifaEnElDia(i);
   end;
-  if (horas>=3) and (horas<6) then  begin
-    clientes[i].cobro:= media_tarifa;
-  end;
-  
 end;
 
 end.

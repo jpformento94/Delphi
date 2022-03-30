@@ -29,6 +29,8 @@ type
     lTarifaHora: TLabel;
     memoCobro: TMemo;
     datePicker: TDateTimePicker;
+    l10min: TLabel;
+    l10minutos: TLabel;
     procedure bAgregarClick(Sender: TObject);
     procedure bSacarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -146,6 +148,7 @@ begin
   lCantEst.Caption:= e.tarifa.ToString;
   lCantMediaEst.Caption:= e.media_tarifa.ToString;
   lTarifaHora.Caption:= e.tarifa_por_hora.ToString;
+  l10Minutos.Caption:= e.tarifa_por_10min.ToString;
 end;
 
 end.

@@ -1,9 +1,10 @@
 object fGUI: TfGUI
   Left = 0
   Top = 0
+  AutoSize = True
   Caption = 'Estacionamiento'
-  ClientHeight = 382
-  ClientWidth = 747
+  ClientHeight = 361
+  ClientWidth = 698
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +16,8 @@ object fGUI: TfGUI
   PixelsPerInch = 96
   TextHeight = 13
   object lCantTexto: TLabel
-    Left = 542
-    Top = 8
+    Left = 534
+    Top = 0
     Width = 133
     Height = 19
     Caption = 'Cantidad de autos:'
@@ -28,8 +29,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lCantidad: TLabel
-    Left = 681
-    Top = 8
+    Left = 689
+    Top = 0
     Width = 9
     Height = 19
     Caption = '0'
@@ -41,8 +42,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lPatente: TLabel
-    Left = 8
-    Top = 8
+    Left = 0
+    Top = 0
     Width = 52
     Height = 19
     Caption = 'Patente'
@@ -54,8 +55,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lHora: TLabel
-    Left = 8
-    Top = 38
+    Left = 0
+    Top = 30
     Width = 34
     Height = 19
     Caption = 'Hora'
@@ -67,8 +68,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lMinutos: TLabel
-    Left = 8
-    Top = 68
+    Left = 0
+    Top = 60
     Width = 55
     Height = 19
     Caption = 'Minutos'
@@ -80,8 +81,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lEstadia: TLabel
-    Left = 542
-    Top = 33
+    Left = 534
+    Top = 25
     Width = 50
     Height = 19
     Caption = 'Estadia'
@@ -93,8 +94,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lMediaEstadia: TLabel
-    Left = 542
-    Top = 58
+    Left = 534
+    Top = 50
     Width = 95
     Height = 19
     Caption = 'Media estadia'
@@ -106,8 +107,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lCantEst: TLabel
-    Left = 681
-    Top = 33
+    Left = 689
+    Top = 25
     Width = 9
     Height = 19
     Caption = '0'
@@ -119,8 +120,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lCantMediaEst: TLabel
-    Left = 681
-    Top = 58
+    Left = 689
+    Top = 50
     Width = 9
     Height = 19
     Caption = '0'
@@ -132,8 +133,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lTarifaPorHora: TLabel
-    Left = 542
-    Top = 83
+    Left = 534
+    Top = 75
     Width = 107
     Height = 19
     Caption = 'Tarifa por hora'
@@ -145,8 +146,34 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object lTarifaHora: TLabel
-    Left = 681
-    Top = 83
+    Left = 689
+    Top = 75
+    Width = 9
+    Height = 19
+    Caption = '0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object l10min: TLabel
+    Left = 534
+    Top = 99
+    Width = 133
+    Height = 19
+    Caption = 'Tarifa cada 10 min'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object l10minutos: TLabel
+    Left = 689
+    Top = 100
     Width = 9
     Height = 19
     Caption = '0'
@@ -158,8 +185,8 @@ object fGUI: TfGUI
     ParentFont = False
   end
   object bAgregar: TButton
-    Left = 8
-    Top = 217
+    Left = 0
+    Top = 209
     Width = 121
     Height = 25
     Caption = 'Agregar vehiculo'
@@ -173,8 +200,8 @@ object fGUI: TfGUI
     OnClick = bAgregarClick
   end
   object bSacar: TButton
-    Left = 8
-    Top = 248
+    Left = 0
+    Top = 240
     Width = 121
     Height = 25
     Caption = 'Sacar vehiculo'
@@ -188,8 +215,8 @@ object fGUI: TfGUI
     OnClick = bSacarClick
   end
   object ePatente: TEdit
-    Left = 66
-    Top = 8
+    Left = 58
+    Top = 0
     Width = 63
     Height = 24
     Alignment = taCenter
@@ -203,8 +230,8 @@ object fGUI: TfGUI
     TabOrder = 2
   end
   object eHora: TEdit
-    Left = 66
-    Top = 38
+    Left = 58
+    Top = 30
     Width = 63
     Height = 24
     Alignment = taCenter
@@ -219,8 +246,8 @@ object fGUI: TfGUI
     TabOrder = 3
   end
   object eMinutos: TEdit
-    Left = 66
-    Top = 68
+    Left = 58
+    Top = 60
     Width = 63
     Height = 24
     Alignment = taCenter
@@ -236,8 +263,8 @@ object fGUI: TfGUI
     OnChange = eMinutosChange
   end
   object memo: TMemo
-    Left = 135
-    Top = 8
+    Left = 127
+    Top = 0
     Width = 401
     Height = 234
     Font.Charset = DEFAULT_CHARSET
@@ -249,8 +276,8 @@ object fGUI: TfGUI
     TabOrder = 5
   end
   object bSetTarifa: TButton
-    Left = 542
-    Top = 108
+    Left = 534
+    Top = 124
     Width = 121
     Height = 25
     Caption = 'Cambiar Tarifa'
@@ -258,8 +285,8 @@ object fGUI: TfGUI
     OnClick = bSetTarifaClick
   end
   object memoCobro: TMemo
-    Left = 135
-    Top = 248
+    Left = 127
+    Top = 240
     Width = 401
     Height = 121
     Font.Charset = DEFAULT_CHARSET
@@ -271,8 +298,8 @@ object fGUI: TfGUI
     TabOrder = 7
   end
   object datePicker: TDateTimePicker
-    Left = 8
-    Top = 98
+    Left = 0
+    Top = 90
     Width = 121
     Height = 21
     Date = 44645.000000000000000000
