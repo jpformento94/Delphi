@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, uEstacionamiento,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, DateUtils;
 
 type
   TfGUI = class(TForm)
@@ -31,11 +31,23 @@ type
     datePicker: TDateTimePicker;
     l10min: TLabel;
     l10minutos: TLabel;
+    lDesde: TLabel;
+    eDiaDesde: TEdit;
+    eMesDesde: TEdit;
+    lBarra1: TLabel;
+    lFechaHasta: TLabel;
+    eDiaHasta: TEdit;
+    eMesHasta: TEdit;
+    lBarra2: TLabel;
+    bCalcularRecaudacion: TButton;
+    memoRecaudacion: TMemo;
+    bRecaudacionPorUnDia: TButton;
     procedure bAgregarClick(Sender: TObject);
     procedure bSacarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure bSetTarifaClick(Sender: TObject);
-    procedure eMinutosChange(Sender: TObject);
+    procedure bCalcularRecaudacionClick(Sender: TObject);
+    procedure bRecaudacionPorUnDiaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +63,7 @@ implementation
 {$R *.dfm}
 
 //Validar datos
-function validarDatos(hora,minutos:integer;patente:string):boolean;
+function validarDatos(hora,minutos:integer):boolean;
   begin
     if (hora>=0) and (hora<=23)  then begin   //Valido las horas
       if (minutos>=0) and (minutos<=59) then begin    //Valido los minutos
@@ -69,7 +81,7 @@ procedure TfGUI.bAgregarClick(Sender: TObject);
 var
   hora, minutos: integer;
   patente: string[7];
-  fecha: string;
+  fecha: tdate;
 begin
   //El form valida que no tenga datos en blanco
   if (eHora.Text<>'') and (eMinutos.Text<>'') and (ePatente.Text<>'') then
@@ -78,11 +90,11 @@ begin
       hora:= strtoint(eHora.Text);
       minutos:= strtoint(eMinutos.Text);
       patente:= ePatente.Text;
-      if (validarDatos(hora,minutos,patente) = true) then
+      if (validarDatos(hora,minutos) = true) then
         begin
           memo.Clear;
-          fecha:= (datetostr(datePicker.Date));
-          e.cargarAuto(hora,minutos,fecha,patente);
+          fecha:= datePicker.Date;
+          e.cargarAuto(patente,fecha,hora,minutos);
           lCantidad.Caption:= e.getCantidadDeAutos.ToString;
           memo.Lines.Add(e.clientesToString);
         end;
@@ -92,11 +104,32 @@ begin
 end;
 
 //Llamado a la funcion sacar auto y devuelve por pantalla cuanto debe abonar
+procedure TfGUI.bCalcularRecaudacionClick(Sender: TObject);
+var
+  dDesde,mDesde,dHasta,mHasta:integer;
+begin
+  dDesde:= strtoint(eDiaDesde.Text);
+  mDesde:= strtoint(eMesDesde.Text);
+  dHasta:= strtoint(eDiaHasta.Text);
+  mHasta:= strtoint(eMesHasta.Text);
+  memoRecaudacion.Clear;
+  memoRecaudacion.Lines.Add(e.recaudacionDiaria(dDesde,mDesde,dHasta,mHasta));
+end;
+
+procedure TfGUI.bRecaudacionPorUnDiaClick(Sender: TObject);
+var
+  dDesde,mDesde:integer;
+begin
+  dDesde:= strtoint(eDiaDesde.Text);
+  mDesde:= strtoint(eMesDesde.Text);
+  memoRecaudacion.Lines.Add(e.recaudacionPorUnDia(dDesde,mDesde))
+end;
+
 procedure TfGUI.bSacarClick(Sender: TObject);
 var
   hora, minutos, dia, mes: integer;
   patente: string[7];
-  fecha: string;
+  fecha: tdate;
 begin
   //El form valida que no tenga datos en blanco
   if (eHora.Text<>'') and (eMinutos.Text<>'') and (ePatente.Text<>'') then
@@ -105,12 +138,12 @@ begin
       hora:= strtoint(eHora.Text);
       minutos:= strtoint(eMinutos.Text);
       patente:= ePatente.Text;
-      if (validarDatos(hora,minutos,patente) = true) then
+      if (validarDatos(hora,minutos) = true) then
         begin
           memo.Clear;
           memoCobro.Clear;
-          fecha:= (datetostr(datePicker.Date));
-          memoCobro.Lines.Add(e.sacarAuto(hora,minutos,fecha,patente));
+          fecha:= datePicker.Date;
+          memoCobro.Lines.Add(e.sacarAuto(patente,fecha,hora,minutos));
           lCantidad.Caption:= e.getCantidadDeAutos.ToString;
           memo.Lines.Add(e.clientesToString);
         end;
@@ -129,11 +162,7 @@ begin
   lCantEst.Caption:= e.tarifa.ToString;
   lCantMediaEst.Caption:= e.media_tarifa.ToString;
   lTarifaHora.Caption:= e.tarifa_por_hora.ToString;
-end;
-
-procedure TfGUI.eMinutosChange(Sender: TObject);
-begin
-
+  l10Minutos.Caption:= e.tarifa_por_10min.ToString;
 end;
 
 //Crea el form e inicializa el vector vacio
@@ -143,6 +172,7 @@ var
   t:double;
 begin
   e.inicializarVectorClientes;
+  e.crearArchivoTexto;
   t:= StrToFloat(InputBox('Ingresar tarifa del dia', 'Tarifa', '100'));
   e.setTarifa(t);
   lCantEst.Caption:= e.tarifa.ToString;
