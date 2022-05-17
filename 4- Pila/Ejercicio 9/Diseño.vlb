@@ -1,0 +1,16 @@
+﻿[Convertir]
+Coordinates=64,10,67,58
+
+[Label1]
+Coordinates=195,10,53,58
+
+[]
+Coordinates=126,78,91,36
+
+[Base]
+Coordinates=10,10,44,58
+Visible=True
+
+[Numero]
+Coordinates=141,10,44,58
+
