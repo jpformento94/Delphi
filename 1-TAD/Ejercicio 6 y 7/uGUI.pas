@@ -17,14 +17,12 @@ type
     ePatente: TEdit;
     lHora: TLabel;
     eHora: TEdit;
-    eMinutos: TEdit;
     lMinutos: TLabel;
     memo: TMemo;
     lEstadia: TLabel;
     lMediaEstadia: TLabel;
     lCantEst: TLabel;
     lCantMediaEst: TLabel;
-    bSetTarifa: TButton;
     lTarifaPorHora: TLabel;
     lTarifaHora: TLabel;
     memoCobro: TMemo;
@@ -42,12 +40,26 @@ type
     bCalcularRecaudacion: TButton;
     memoRecaudacion: TMemo;
     bRecaudacionPorUnDia: TButton;
+    cambiarTarifas: TButton;
+    Diaria: TEdit;
+    medioDia: TEdit;
+    xhora: TEdit;
+    diezmin: TEdit;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    cargar: TButton;
+    Label2: TLabel;
+    eminutos: TEdit;
     procedure bAgregarClick(Sender: TObject);
     procedure bSacarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure bSetTarifaClick(Sender: TObject);
+   // procedure bSetTarifaClick(Sender: TObject);
     procedure bCalcularRecaudacionClick(Sender: TObject);
     procedure bRecaudacionPorUnDiaClick(Sender: TObject);
+    procedure cambiarTarifasClick(Sender: TObject);
+    procedure cargarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -153,7 +165,7 @@ begin
 end;
 
 //Permite camibar el valor de la tarifa mientras se ejecuta el programa
-procedure TfGUI.bSetTarifaClick(Sender: TObject);
+{procedure TfGUI.bSetTarifaClick(Sender: TObject);
 var
   t:double;
 begin
@@ -163,22 +175,52 @@ begin
   lCantMediaEst.Caption:= e.media_tarifa.ToString;
   lTarifaHora.Caption:= e.tarifa_por_hora.ToString;
   l10Minutos.Caption:= e.tarifa_por_10min.ToString;
+end;}
+
+procedure TfGUI.cambiarTarifasClick(Sender: TObject);
+begin
+  label1.Visible:=true;
+  label3.Visible:=true;
+  label4.Visible:=true;
+  label5.Visible:=true;
+  diaria.Visible:=true;
+  mediodia.Visible:=true;
+  xhora.Visible:=true;
+  diezmin.Visible:=true;
+  cargar.visible:=true;
+end;
+
+procedure TfGUI.cargarClick(Sender: TObject);
+begin
+  e.setTarifa(strtoint(diaria.Text),strtoint(diezmin.Text),
+              strtoint(mediodia.Text),strtoint(xhora.Text));
+
+  lcantest.Caption:= diaria.Text;
+  lcantmediaest.Caption:= mediodia.Text;
+  ltarifahora.Caption:=xhora.Text;
+  l10minutos.Caption:=diezmin.Text;
+
 end;
 
 //Crea el form e inicializa el vector vacio
-//Permite cargar la tarifa al inicio
+
 procedure TfGUI.FormCreate(Sender: TObject);
 var
   t:double;
 begin
   e.inicializarVectorClientes;
   e.crearArchivoTexto;
-  t:= StrToFloat(InputBox('Ingresar tarifa del dia', 'Tarifa', '100'));
-  e.setTarifa(t);
-  lCantEst.Caption:= e.tarifa.ToString;
-  lCantMediaEst.Caption:= e.media_tarifa.ToString;
-  lTarifaHora.Caption:= e.tarifa_por_hora.ToString;
-  l10Minutos.Caption:= e.tarifa_por_10min.ToString;
+  label1.Visible:=false;
+
+  label3.Visible:=false;
+  label4.Visible:=false;
+  label5.Visible:=false;
+  diaria.Visible:=false;
+  mediodia.Visible:=false;
+  xhora.Visible:=false;
+  diezmin.Visible:=false;
+  cargar.Visible:=false;
 end;
+
 
 end.

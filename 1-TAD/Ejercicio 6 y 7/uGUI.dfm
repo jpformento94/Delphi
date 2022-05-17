@@ -2,8 +2,8 @@ object fGUI: TfGUI
   Left = 0
   Top = 0
   Caption = 'Estacionamiento'
-  ClientHeight = 435
-  ClientWidth = 735
+  ClientHeight = 470
+  ClientWidth = 799
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -235,6 +235,41 @@ object fGUI: TfGUI
     Font.Style = []
     ParentFont = False
   end
+  object Label1: TLabel
+    Left = 552
+    Top = 168
+    Width = 27
+    Height = 13
+    Caption = 'Diaria'
+  end
+  object Label3: TLabel
+    Left = 546
+    Top = 211
+    Width = 33
+    Height = 13
+    Caption = '1/2 dia'
+  end
+  object Label4: TLabel
+    Left = 552
+    Top = 251
+    Width = 31
+    Height = 13
+    Caption = 'x hora'
+  end
+  object Label5: TLabel
+    Left = 552
+    Top = 289
+    Width = 31
+    Height = 13
+    Caption = '10 min'
+  end
+  object Label2: TLabel
+    Left = 368
+    Top = 244
+    Width = 31
+    Height = 13
+    Caption = 'Label2'
+  end
   object bAgregar: TButton
     Left = 8
     Top = 132
@@ -279,6 +314,7 @@ object fGUI: TfGUI
     MaxLength = 7
     ParentFont = False
     TabOrder = 2
+    Text = '123456'
   end
   object eHora: TEdit
     Left = 66
@@ -295,8 +331,9 @@ object fGUI: TfGUI
     NumbersOnly = True
     ParentFont = False
     TabOrder = 3
+    Text = '12'
   end
-  object eMinutos: TEdit
+  object eminutos: TEdit
     Left = 66
     Top = 68
     Width = 63
@@ -311,6 +348,7 @@ object fGUI: TfGUI
     NumbersOnly = True
     ParentFont = False
     TabOrder = 4
+    Text = '00'
   end
   object memo: TMemo
     Left = 135
@@ -325,15 +363,6 @@ object fGUI: TfGUI
     ParentFont = False
     TabOrder = 5
   end
-  object bSetTarifa: TButton
-    Left = 542
-    Top = 132
-    Width = 121
-    Height = 25
-    Caption = 'Cambiar Tarifa'
-    TabOrder = 6
-    OnClick = bSetTarifaClick
-  end
   object memoCobro: TMemo
     Left = 135
     Top = 163
@@ -345,7 +374,7 @@ object fGUI: TfGUI
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
   end
   object datePicker: TDateTimePicker
     Left = 8
@@ -354,7 +383,7 @@ object fGUI: TfGUI
     Height = 21
     Date = 44652.000000000000000000
     Time = 44652.000000000000000000
-    TabOrder = 8
+    TabOrder = 7
   end
   object eDiaDesde: TEdit
     Left = 8
@@ -370,7 +399,7 @@ object fGUI: TfGUI
     MaxLength = 2
     NumbersOnly = True
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 8
   end
   object eMesDesde: TEdit
     Left = 60
@@ -386,7 +415,7 @@ object fGUI: TfGUI
     MaxLength = 2
     NumbersOnly = True
     ParentFont = False
-    TabOrder = 10
+    TabOrder = 9
   end
   object eDiaHasta: TEdit
     Left = 8
@@ -402,7 +431,7 @@ object fGUI: TfGUI
     MaxLength = 2
     NumbersOnly = True
     ParentFont = False
-    TabOrder = 11
+    TabOrder = 10
   end
   object eMesHasta: TEdit
     Left = 60
@@ -418,7 +447,7 @@ object fGUI: TfGUI
     MaxLength = 2
     NumbersOnly = True
     ParentFont = False
-    TabOrder = 12
+    TabOrder = 11
   end
   object bCalcularRecaudacion: TButton
     Left = 8
@@ -432,12 +461,12 @@ object fGUI: TfGUI
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 13
+    TabOrder = 12
     OnClick = bCalcularRecaudacionClick
   end
   object memoRecaudacion: TMemo
     Left = 135
-    Top = 261
+    Top = 263
     Width = 401
     Height = 164
     Font.Charset = DEFAULT_CHARSET
@@ -446,7 +475,7 @@ object fGUI: TfGUI
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 14
+    TabOrder = 13
   end
   object bRecaudacionPorUnDia: TButton
     Left = 8
@@ -454,7 +483,54 @@ object fGUI: TfGUI
     Width = 121
     Height = 25
     Caption = 'Recaudacion por un dia'
-    TabOrder = 15
+    TabOrder = 14
     OnClick = bRecaudacionPorUnDiaClick
+  end
+  object cambiarTarifas: TButton
+    Left = 550
+    Top = 132
+    Width = 107
+    Height = 25
+    Caption = 'Cambiar Tarifas'
+    TabOrder = 15
+    OnClick = cambiarTarifasClick
+  end
+  object Diaria: TEdit
+    Left = 585
+    Top = 165
+    Width = 121
+    Height = 21
+    TabOrder = 16
+  end
+  object medioDia: TEdit
+    Left = 585
+    Top = 208
+    Width = 121
+    Height = 21
+    TabOrder = 17
+  end
+  object xhora: TEdit
+    Left = 585
+    Top = 248
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 18
+  end
+  object diezmin: TEdit
+    Left = 585
+    Top = 286
+    Width = 121
+    Height = 21
+    TabOrder = 19
+  end
+  object cargar: TButton
+    Left = 631
+    Top = 313
+    Width = 75
+    Height = 25
+    Caption = 'Cargar'
+    TabOrder = 20
+    OnClick = cargarClick
   end
 end

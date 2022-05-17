@@ -3,8 +3,7 @@ unit uEstacionamiento;
 interface
 
 uses
-    Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-    Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, DateUtils;
+    System.SysUtils,Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, DateUtils;
 
 Const
   MIN = 1;
@@ -37,7 +36,7 @@ type
       tarifa_por_hora: double;
       tarifa_por_10min: double;
       function getCantidadDeAutos():word;
-      procedure setTarifa(monto:double);
+      procedure setTarifa(montodia,diezmin,media,hora:double);
       procedure cargarAuto(p:string;fecha:tdate;hora,mn: integer);
       function sacarAuto(p:string;fecha:tdate;hora,mn: integer):string;
       procedure inicializarVectorClientes();
@@ -250,12 +249,12 @@ begin
 end;
 
 //Carga la tarifa que diga el usuario del programa
-procedure estacionamiento.setTarifa(monto:double);
+procedure estacionamiento.setTarifa(montodia,diezmin,media,hora:double);
 begin
-  tarifa:= monto;
-  media_tarifa:= tarifa / 2;
-  tarifa_por_hora:= tarifa / 4;
-  tarifa_por_10min:= tarifa / 10;
+  tarifa:= montodia;
+  media_tarifa:= media;
+  tarifa_por_hora:= hora;
+  tarifa_por_10min:= diezmin;
 end;
 
 {------------------------------------------------------------------------------}

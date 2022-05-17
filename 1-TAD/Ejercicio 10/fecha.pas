@@ -12,9 +12,8 @@ type
     dia:integer;
     mes:integer;
     año:integer;
-
   public
-    function Vencida(fHoy:fechas):boolean;
+    function Vencido(fHoy:fechas):boolean;
     procedure cargar(ndia,nmes,naño:integer) ;
     function mostrarFecha():string;
   end;
@@ -34,7 +33,7 @@ if (nmes >= 1) and (nmes <= 12) then
   else
     ShowMessage('Ingrese un mes valido');
 
-if (naño >= 2010) and (naño <= 2040) then
+if (naño >= 2000) and (naño <= 2040) then
   año := naño
   else
     ShowMessage('Ingrese un año valido');
@@ -46,24 +45,24 @@ begin
 end;
 
 
-function Fechas.vencida(fHoy:fechas):boolean;
+function Fechas.vencido(fHoy:fechas):boolean;
 begin
   if (fHoy.año>año) then
   begin
-        vencida:=true;
+        vencido:=true;
   end
   else
     if (fHoy.año=año)and (fHoy.mes<mes) then
     begin
-      vencida:=true;
+      vencido:=true;
     end
     else
       if (fHoy.año=año)and (fHoy.mes=mes) and (fHoy.dia<=dia)  then
       begin
-        vencida:=true;
+        vencido:=true;
       end
       else
-        vencida:=false;
+        vencido:=false;
 end;
 
 

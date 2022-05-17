@@ -98,8 +98,8 @@ object Form1: TForm1
     Caption = 'Ingrese cantidad de billetes/monedas de cada importe'
   end
   object Label24: TLabel
-    Left = 8
-    Top = 114
+    Left = 235
+    Top = 8
     Width = 405
     Height = 13
     Caption = 
@@ -240,6 +240,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Saldo actual'
     TabOrder = 0
+    Visible = False
     OnClick = SaldoClick
   end
   object Cargar: TButton
@@ -268,6 +269,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Cerrar caja'
     TabOrder = 3
+    Visible = False
     OnClick = CerrarcajaClick
   end
   object CargarM1: TEdit
@@ -364,6 +366,7 @@ object Form1: TForm1
     Width = 521
     Height = 129
     TabOrder = 15
+    Visible = False
   end
   object Totalcompra: TEdit
     Left = 424
@@ -479,6 +482,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Reiniciar Programa'
     TabOrder = 28
+    Visible = False
     OnClick = Button1Click
   end
 end
